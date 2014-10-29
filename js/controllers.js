@@ -1,11 +1,10 @@
 var controllers = {};
 
 controllers.AppController = function($scope, UsersService, UserService) {	
-	this.status = 0;
-	this.user = null;
+	$scope.status = 0;
 
 	// users in game
-	this.users = UsersService.getUsers();
+	$scope.users = UsersService.getUsers();
 
 	// join main game
 	$scope.joinGame = function(username) {
@@ -13,7 +12,7 @@ controllers.AppController = function($scope, UsersService, UserService) {
 			return false;
 		}
 
-		this.user = {
+		var user = {
 			username: username,
 			position: {
 				x: 0,
@@ -21,14 +20,15 @@ controllers.AppController = function($scope, UsersService, UserService) {
 			}
 		};
 
-		this.users.$add(this.user).then(function(response) {
-			this.user = UserService.getUser(response.name());
-			this.user.$bind($scope, 'user');
+		// add to game and bind user to scope
+		$scope.users.$add(user).then(function(response) {
+			user = UserService.getUser(response.name());
+			user.$bind($scope, 'user');
 	
 			// move to next step
-			this.status = 1;
-		}.bind(this));
-	}.bind(this);
+			$scope.status = 1;
+		});
+	};
 
 	$scope.movePlayer = function(coord, direction) {
 		if ($scope.user) {
@@ -39,11 +39,12 @@ controllers.AppController = function($scope, UsersService, UserService) {
 				$scope.user.position.y += direction;
 			}
 		}
-	}.bind(this);
+	};
 
 	$scope.leaveGame = function() {
 		if ($scope.user) {
 			$scope.user.$remove();
+			$scope.status = 0;
 		}
 	};
 
@@ -51,6 +52,7 @@ controllers.AppController = function($scope, UsersService, UserService) {
 	window.onbeforeunload = function() {
 		if ($scope.user) {
 			$scope.user.$remove();
+			$scope.status = 0;
 		}
 	}
 };

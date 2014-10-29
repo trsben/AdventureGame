@@ -1,10 +1,10 @@
-<div ng-show="app.status == 0">
+<div ng-show="status == 0">
 	<h2>Join game</h2>
 	<input type="text" ng-model="app.username" />
 	<a ng-click="joinGame(app.username)">Join game</a>
 </div>
 
-<div ng-show="app.status == 1">
+<div ng-show="status == 1">
 	<h2>Controls</h2>
 
 	<a ng-click="movePlayer('x', -1)">Move Left</a>
@@ -17,6 +17,6 @@
 </div>
 
 <h2>Players in game:</h2>
-<ul ng-repeat="user in app.users">
+<ul ng-repeat="user in users">
 	<li>{{user.username}} - pos: {{user.position.x}} / {{user.position.y}}</li>
 </ul>
