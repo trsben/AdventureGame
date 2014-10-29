@@ -7,7 +7,12 @@
 <div ng-show="app.status == 1">
 	<h2>Controls</h2>
 
-	<a ng-click="movePlayer()">Move Right</a>
+	<a ng-click="movePlayer('x', -1)">Move Left</a>
+	<a ng-click="movePlayer('x', 1)">Move Right</a>
+
+	<a ng-click="movePlayer('y', -1)">Move Up</a>
+	<a ng-click="movePlayer('y', 1)">Move Down</a>
+
 	<a ng-click="leaveGame()">Leave</a>
 </div>
 

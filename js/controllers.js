@@ -23,26 +23,34 @@ controllers.AppController = function($scope, UsersService, UserService) {
 
 		this.users.$add(this.user).then(function(response) {
 			this.user = UserService.getUser(response.name());
+			this.user.$bind($scope, 'user');
 	
 			// move to next step
 			this.status = 1;
 		}.bind(this));
 	}.bind(this);
 
-	$scope.movePlayer = function() {
-		this.user.position.x++;
-
-		console.log(this.user)
+	$scope.movePlayer = function(coord, direction) {
+		if ($scope.user) {
+			if (coord == 'x') {
+				$scope.user.position.x += direction;
+			}
+			else {
+				$scope.user.position.y += direction;
+			}
+		}
 	}.bind(this);
 
 	$scope.leaveGame = function() {
-		if (this.user) {
-			this.user.$remove();
+		if ($scope.user) {
+			$scope.user.$remove();
 		}
 	};
 
 	// leaving game
 	window.onbeforeunload = function() {
-
+		if ($scope.user) {
+			$scope.user.$remove();
+		}
 	}
 };
