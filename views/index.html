@@ -1,0 +1,17 @@
+<div ng-show="app.status == 0">
+	<h2>Join game</h2>
+	<input type="text" ng-model="app.username" />
+	<a ng-click="joinGame(app.username)">Join game</a>
+</div>
+
+<div ng-show="app.status == 1">
+	<h2>Controls</h2>
+
+	<a ng-click="movePlayer()">Move Right</a>
+	<a ng-click="leaveGame()">Leave</a>
+</div>
+
+<h2>Players in game:</h2>
+<ul ng-repeat="user in app.users">
+	<li>{{user.username}} - pos: {{user.position.x}} / {{user.position.y}}</li>
+</ul>
