@@ -2,8 +2,6 @@ var controllers = {};
 
 controllers.AppController = function($scope, UsersService, UserService) {	
 	$scope.status = 0;
-
-	// users in game
 	$scope.users = UsersService.getUsers();
 
 	// join main game
@@ -23,9 +21,10 @@ controllers.AppController = function($scope, UsersService, UserService) {
 		// add to game and bind user to scope
 		$scope.users.$add(user).then(function(response) {
 			user = UserService.getUser(response.name());
-			user.$bind($scope, 'user');
+			user.$bind($scope, 'user').then(function(unbind) {
+				$scope.user.$unbind = unbind;
+			});
 	
-			// move to next step
 			$scope.status = 1;
 		});
 	};
@@ -43,15 +42,19 @@ controllers.AppController = function($scope, UsersService, UserService) {
 
 	$scope.leaveGame = function() {
 		if ($scope.user) {
+			$scope.user.$unbind();
 			$scope.user.$remove();
+
 			$scope.status = 0;
 		}
 	};
 
-	// leaving game
+	// leaving browser
 	window.onbeforeunload = function() {
 		if ($scope.user) {
+			$scope.user.$unbind();
 			$scope.user.$remove();
+
 			$scope.status = 0;
 		}
 	}
