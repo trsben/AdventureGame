@@ -29,35 +29,15 @@ controllers.AppController = function($scope, UsersService, UserService) {
 	
 			$scope.status = 1;
 		});
-	};
 
-	$scope.movePlayer = function(coord, direction) {
-		if ($scope.user) {
-			if (coord == 'x') {
-				$scope.user.position.x += direction;
+		// leaving browser
+		window.onbeforeunload = function() {
+			if ($scope.user) {
+				$scope.user.$unbind();
+				$scope.user.$remove();
+
+				$scope.status = 0;
 			}
-			else {
-				$scope.user.position.y += direction;
-			}
-		}
+		};
 	};
-
-	$scope.leaveGame = function() {
-		if ($scope.user) {
-			$scope.user.$unbind();
-			$scope.user.$remove();
-
-			$scope.status = 0;
-		}
-	};
-
-	// leaving browser
-	window.onbeforeunload = function() {
-		if ($scope.user) {
-			$scope.user.$unbind();
-			$scope.user.$remove();
-
-			$scope.status = 0;
-		}
-	}
 };

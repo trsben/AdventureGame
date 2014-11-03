@@ -6,16 +6,7 @@
 	</div>
 
 	<div ng-show="status == 1">
-		<h2>Controls</h2>
-
-		<div class="controls">
-			<a ng-click="movePlayer('y', -1)" class="up">Move Up</a>
-			<a ng-click="movePlayer('x', -1)" class="left">Move Left</a>
-			<a ng-click="movePlayer('y', 1)" class="down">Move Down</a>
-			<a ng-click="movePlayer('x', 1)" class="right">Move Right</a>
-		</div>
-
-		<a ng-click="leaveGame()" class="button">Leave</a>
+		<controls></controls>
 	</div>
 
 	<h2>Players in game:</h2>
