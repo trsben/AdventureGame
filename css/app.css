@@ -1,0 +1,53 @@
+.game-information {
+  float: left;
+  width: 25%;
+  border: 1px solid #ccc;
+  height: 450px;
+  padding: 10px; }
+  .game-information h2,
+  .game-information > div {
+    margin: 0 0 10px;
+    overflow: hidden; }
+  .game-information input {
+    float: left;
+    margin: 0 0 10px; }
+
+.game-board {
+  width: 850px;
+  float: right;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  height: 450px;
+  position: relative; }
+  .game-board .player {
+    display: block;
+    width: 25px;
+    height: 25px;
+    position: absolute; }
+
+.button {
+  background: grey;
+  padding: 5px;
+  display: block;
+  float: left;
+  clear: left; }
+
+.controls {
+  position: relative;
+  overflow: hidden;
+  width: 250px;
+  margin: 0 0 10px; }
+  .controls a {
+    display: block;
+    width: 80px;
+    height: 80px;
+    background: grey;
+    float: left;
+    margin: 0 2px 0 0;
+    text-align: center;
+    line-height: 80px;
+    font-size: 11px; }
+    .controls a.up {
+      margin: 0 82px 2px; }
+
+/*# sourceMappingURL=app.css.map */

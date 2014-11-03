@@ -1,22 +1,29 @@
-<div ng-show="status == 0">
-	<h2>Join game</h2>
-	<input type="text" ng-model="app.username" />
-	<a ng-click="joinGame(app.username)">Join game</a>
+<div class="game-information">
+	<div ng-show="status == 0">
+		<h2>Join game</h2>
+		<input type="text" ng-model="app.username" />
+		<a ng-click="joinGame(app.username)" class="button">Join game</a>
+	</div>
+
+	<div ng-show="status == 1">
+		<h2>Controls</h2>
+
+		<div class="controls">
+			<a ng-click="movePlayer('y', -1)" class="up">Move Up</a>
+			<a ng-click="movePlayer('x', -1)" class="left">Move Left</a>
+			<a ng-click="movePlayer('y', 1)" class="down">Move Down</a>
+			<a ng-click="movePlayer('x', 1)" class="right">Move Right</a>
+		</div>
+
+		<a ng-click="leaveGame()" class="button">Leave</a>
+	</div>
+
+	<h2>Players in game:</h2>
+	<ul>
+		<li ng-repeat="user in users">{{user.username}}</li>
+	</ul>
 </div>
 
-<div ng-show="status == 1">
-	<h2>Controls</h2>
-
-	<a ng-click="movePlayer('x', -1)">Move Left</a>
-	<a ng-click="movePlayer('x', 1)">Move Right</a>
-
-	<a ng-click="movePlayer('y', -1)">Move Up</a>
-	<a ng-click="movePlayer('y', 1)">Move Down</a>
-
-	<a ng-click="leaveGame()">Leave</a>
+<div class="game-board">
+	<div class="player" ng-repeat="user in users" style="background: {{user.color}}; top: {{userService.getTopPosition(user)}}; left: {{userService.getLeftPosition(user)}};"></div>
 </div>
-
-<h2>Players in game:</h2>
-<ul ng-repeat="user in users">
-	<li>{{user.username}} - pos: {{user.position.x}} / {{user.position.y}}</li>
-</ul>

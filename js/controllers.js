@@ -3,6 +3,7 @@ var controllers = {};
 controllers.AppController = function($scope, UsersService, UserService) {	
 	$scope.status = 0;
 	$scope.users = UsersService.getUsers();
+	$scope.userService = UserService;
 
 	// join main game
 	$scope.joinGame = function(username) {
@@ -12,6 +13,7 @@ controllers.AppController = function($scope, UsersService, UserService) {
 
 		var user = {
 			username: username,
+			color: getRandomColor(),
 			position: {
 				x: 0,
 				y: 0
